@@ -1,6 +1,6 @@
 (defproject cljshortener "0.1.0-SNAPSHOT"
-  :description "FIXME: write description"
-  :url "http://example.com/FIXME"
+  :description "A simple URL shortener in Clojure."
+  :url "http://github.com/larsyencken/web-kata"
   :dependencies [[org.clojure/clojure "1.4.0"]
                  [compojure "1.1.1"]
                  [com.novemberain/monger "1.3.4"]
