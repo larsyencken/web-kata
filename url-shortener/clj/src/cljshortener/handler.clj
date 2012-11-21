@@ -78,7 +78,7 @@
 (defn redirect-from [short-url]
   "Attempt to serve up the short url, if it exists."
   ;; XXX we need to search by a different Mongo attribute
-  (let [rec (mc/find-map-by-id "urls" short-url)]
+  (let [rec (mc/find-one-as-map "urls" {:short_url short-url})]
     (if (= rec nil)
       (route/not-found "Not found")
       (redirect-to (rec :_id)))))
