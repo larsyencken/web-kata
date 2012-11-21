@@ -67,17 +67,21 @@ def gen_short_url(url):
 
 
 def iter_shortened(url):
+    d62 = digest62(url)
+    for i in xrange(2, len(d62) + 1):
+        yield d62[:i]
+
+
+def digest62(url):
     h = hashlib.md5(url)
+    n = int('0x' + h.hexdigest(), 16)
     max_chars = int(math.ceil(math.log(2) * 8 * h.digest_size / math.log(62)))
-    n = sum([j * (256 ** i) for (i, j) in enumerate(map(ord, h.digest()))])
     cs = []
     for i in xrange(max_chars):
         n, c = divmod(n, 62)
         cs.append(c)
     digest62 = ''.join(to_code(c) for c in reversed(cs))
-
-    for i in xrange(2, len(digest62) + 1):
-        yield digest62[:i]
+    return digest62
 
 
 def to_code(c):
